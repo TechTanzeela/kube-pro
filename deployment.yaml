@@ -2,9 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kube-project-deployment
-  command : ["sleep", "3600"]
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: kube-project
@@ -14,7 +13,8 @@ spec:
         app: kube-project
     spec:
       containers:
-      - name: kube-project
+      - name: kube-project-container
         image: techtanzila/kube-project:latest
+        command: ["sleep", "3600"]   # <-- here under container spec, NOT metadata
         ports:
         - containerPort: 80
